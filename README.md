@@ -24,11 +24,14 @@ Mon environnement est entièrement conteneurisé et organisé par dossiers spéc
 
 ---
 
-## ⚙️ Scripts & Automatisation
+## ⚙️ Scripts & Automatisation (Exploitation & Maintenance)
 
-L'automatisation est au cœur de la gestion de mon infrastructure pour garantir la résilience et la continuité des services :
+L'automatisation est au cœur de la gestion de mon infrastructure pour garantir la résilience, la maintenance et le monitoring des services :
 
-* **`backup-minecraft.sh` :** Script Bash automatisé (planifié via une tâche Cron) qui réalise une sauvegarde à chaud du serveur de jeu chaque nuit à 3h00. Il prend en charge la compression des données, la rotation des archives et le nettoyage automatique pour préserver l'espace disque.
+* **`backup_project.sh` :** Script Bash d'exploitation permettant de réaliser des sauvegardes à chaud de mes volumes de données (ex: Nextcloud, Minecraft). Le script coupe proprement le conteneur Docker ciblé via `docker-compose down`, génère une archive compressée `.tar.gz` datée, relance le service en tâche de fond (`up -d`), et applique une politique de rétention en nettoyant automatiquement les archives de plus de 7 jours (`find ... -delete`).
+* **`dockermaster.sh` :** Script d'administration de flotte visant à orchestrer et appliquer des actions de masse (`start`, `stop`, `status`, `build`) sur un tableau de projets Docker conteneurisés de manière séquentielle.
+* **`rpi_health_report.sh` :** Script de monitoring matériel et système pour le suivi de mon Raspberry Pi. Il extrait et formate les métriques vitales : température du processeur (`thermal_zone0`), occupation de la RAM (`free -h`), espace disque des partitions (`df -h`) et multiplexage du Top 5 des processus les plus gourmands via `ps aux`.
+* **`update_system.sh` :** Script d'automatisation des tâches de maintenance courantes de l'OS (mise à jour des paquets, application des upgrades et nettoyage des dépendances obsolètes via `apt autoremove`).
 
 ---
 
