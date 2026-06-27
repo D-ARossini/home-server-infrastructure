@@ -1,7 +1,7 @@
 #!/bin/bash
 #dockermaster: Gère les actions de base sur les projets docker
 
-ACTIION=$1 #action demandée (start, stop, status, build)
+ACTION=$1 #action demandée (start, stop, status, build)
 
 #liste des chemins absolus vers les futurs projets docker (à modifier au fil du temps)
 PROJECTS=(
